@@ -1,0 +1,63 @@
+{
+	"name": "Santanator Web App",
+	"image": "mcr.microsoft.com/devcontainers/python:1-3.11-bullseye",
+	
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "lts"
+		},
+		"ghcr.io/devcontainers/features/git:1": {
+			"version": "latest"
+		}
+	},
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-python.black-formatter",
+				"ms-python.flake8",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"dsznajder.es7-react-js-snippets",
+				"bradlc.vscode-tailwindcss",
+				"ms-azuretools.vscode-docker"
+			],
+			"settings": {
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.linting.enabled": true,
+				"python.linting.pylintEnabled": false,
+				"python.linting.flake8Enabled": true,
+				"python.formatting.provider": "black",
+				"editor.formatOnSave": true,
+				"editor.codeActionsOnSave": {
+					"source.fixAll.eslint": "explicit"
+				},
+				"eslint.validate": [
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact"
+				]
+			}
+		}
+	},
+
+	"forwardPorts": [3000, 5000],
+
+	"portsAttributes": {
+		"3000": {
+			"label": "React Frontend",
+			"onAutoForward": "notify"
+		},
+		"5000": {
+			"label": "Flask Backend API",
+			"onAutoForward": "notify"
+		}
+	},
+
+	"postCreateCommand": "pip install --user flask flask-cors && npm install -g npm@latest",
+
+	"remoteUser": "vscode"
+}
